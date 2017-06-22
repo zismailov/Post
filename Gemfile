@@ -28,6 +28,7 @@ end
 gem 'figaro'
 gem 'devise'
 gem 'will_paginate', '~> 3.1.0'
+gem 'pundit', '1.1.0'
 
 group :development, :test do
   gem 'pry'
