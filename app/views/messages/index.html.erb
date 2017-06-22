@@ -1,1 +1,24 @@
-<h1>Messages#index</h1>
+<h1>All messagess</h1>
+<div class="row">
+  <div class="col-3">
+    <list-group>
+      <a class="list-group-item" href="#">Sent messages</a>
+      <a class="list-group-item" href="#">Received messages</a>
+      <a class="list-group-item" href="#">Drafts</a>
+    </list-group>
+  </div>
+
+  <div class="col-9">
+    <div class="list-group">
+      <% @messages.each do |message| %>
+        <%= link_to message, class: 'list-group-item list-group-item-action flex-column align-items-start' do %>
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1"><%= message.title %></h5>
+            <small><%= message.created_at %></small>
+            <p class="mb-1"><%= message.content %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
