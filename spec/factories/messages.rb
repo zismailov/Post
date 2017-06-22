@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :message do
-    title { FFaker::Lorem.words }
+    title { FFaker::Lorem.word }
     content { FFaker::Lorem.paragraph }
     draft false
     association :sender, factory: :user
