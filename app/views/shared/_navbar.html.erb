@@ -1,0 +1,27 @@
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbar" data-toggle="collapse" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <%= link_to 'Post', root_path, class: 'navbar-brand' %>
+
+  <div class="collapse navbar-collapse float-left" id="navbar">
+    <% if signed_in? %>
+      <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="http://example.com" id="navbar_dropdown_signed_in">
+        Hi, <%= current_user.first_name %>
+      </a>
+      <div aria-labelledby="navbar_dropdown_signed_in" class="dropdown-menu">
+        <%= link_to 'Settings', edit_user_registration_path, class: 'dropdown-item' %>
+        <%= link_to 'Sign out', destroy_user_session_path, data: { method: :delete }, class: 'dropdown-item' %>
+      </div>
+    <% else %>
+      <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="http://example.com" id="navbar_dropdown_signed_out">
+        SIGNED OUT
+      </a>
+      <div aria-labelledby="navbar_dropdown_signed_out" class="dropdown-menu">
+        <%= link_to 'Sign in', new_user_session_path, class: 'dropdown-item' %>
+        <%= link_to 'Sign up', new_user_registration_path, class: 'dropdown-item' %>
+      </div>
+    <% end %>
+  </div>
+</nav>
