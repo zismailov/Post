@@ -5,4 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :first_name, :last_name, presence: true
+
+  has_many :sent_messages, foreign_key: :sender_id, class_name: 'Message'
+  has_many :received_messages, foreign_key: :receiver_id, class_name: 'Message'
 end

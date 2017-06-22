@@ -12,6 +12,7 @@
     <div class="container">
       <%= render 'shared/navbar' %>
       <%= yield %>
+      <%= switch_user_select if Rails.env.development? %>
     </div>
   </body>
 </html>
