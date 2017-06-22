@@ -50,6 +50,7 @@ end
 group :development do
   gem 'bullet'
   gem 'switch_user'
+  gem 'annotate'
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
