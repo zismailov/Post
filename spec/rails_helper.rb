@@ -8,6 +8,8 @@ require 'devise'
 require 'factory_girl_rails'
 require 'shoulda/matchers'
 require 'support/database_cleaner'
+require 'capybara/poltergeist'
+require 'capybara-screenshot/rspec'
 
 include Warden::Test::Helpers
 
@@ -29,7 +31,6 @@ Capybara.server_port = 3001
 Capybara.app_host = 'http://localhost:3001'
 
 RSpec.configure do |config|
-  #config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
@@ -39,5 +40,6 @@ RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
   config.include Warden::Test::Helpers
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include FeatureHelpers, type: :feature
 
 end

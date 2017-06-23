@@ -1,6 +1,6 @@
-describe 'Users' do
-  describe 'registration' do
-    it 'failed if no first name provided' do
+feature 'Users' do
+  feature 'registration' do
+    scenario 'failed if no first name provided' do
       visit new_user_registration_path
 
       fill_in 'Last name', with: 'Bill'
@@ -13,7 +13,7 @@ describe 'Users' do
       expect(page).to have_content "First name can't be blank"
     end
 
-    it 'failed if no last name provided' do
+    scenario 'failed if no last name provided' do
       visit new_user_registration_path
 
       fill_in 'First name', with: 'Gates'

@@ -14,10 +14,11 @@ class MessagesController < ApplicationController
   end
 
   def create
-    message = current_user.sent_messages.build(message_params)
+    message = MessageBuilderService.new(current_user.id, message_params).call
 
     if message.save
-      redirect_to message, notice: 'Message sent'
+      RecipientCreatorService.new(message.id, message_params).call
+      redirect_to message, notice: 'Message sent!'
     else
       redirect_to messages_path, notice: 'Something went wrong'
     end
@@ -26,6 +27,6 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:title, :content, :draft, receiver_ids: [])
+    params.require(:message).permit(:title, :content, :draft, recipient_ids: [])
   end
 end

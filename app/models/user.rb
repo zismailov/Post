@@ -28,5 +28,6 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   has_many :sent_messages, foreign_key: :sender_id, class_name: 'Message'
-  has_many :received_messages, foreign_key: :recipient_id, class_name: 'Message'
+  has_many :recipients
+  has_many :received_messages, through: :recipients, foreign_key: :message_id, source: :message
 end

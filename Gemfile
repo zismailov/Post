@@ -41,6 +41,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'capybara-screenshot', '~> 1.0.14'
   gem 'poltergeist'
   gem 'database_cleaner', '~> 1.3'
   gem 'shoulda-matchers', '~> 2.8'
