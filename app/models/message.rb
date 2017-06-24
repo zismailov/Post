@@ -17,9 +17,9 @@
 
 class Message < ApplicationRecord
   attr_accessor :recipient_ids
-  
+
   belongs_to :sender, class_name: 'User', foreign_key: :sender_id
-  has_many :user_messages
+  has_many :user_messages, dependent: :destroy
 
   scope :drafts, -> { where(draft: true) }
 end

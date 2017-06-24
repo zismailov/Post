@@ -21,6 +21,9 @@ FactoryGirl.define do
     content { FFaker::Lorem.paragraph }
     draft false
     association :sender, factory: :user
-    association :receiver, factory: :user
+
+    after_create do |message|
+      message.user_messages << FactoryGirl.create(:user_message)
+    end
   end
 end

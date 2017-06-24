@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170624084930) do
+ActiveRecord::Schema.define(version: 20170624113703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,9 @@ ActiveRecord::Schema.define(version: 20170624084930) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "state", default: 0
     t.index ["message_id"], name: "index_user_messages_on_message_id"
+    t.index ["state"], name: "index_user_messages_on_state"
     t.index ["user_id"], name: "index_user_messages_on_user_id"
   end
 

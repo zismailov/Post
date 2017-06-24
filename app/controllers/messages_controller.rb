@@ -4,6 +4,9 @@ class MessagesController < ApplicationController
   def show
     @message = Message.find(params[:id])
     authorize @message
+
+    user_message = @message.user_messages.find_by(user: current_user)
+    user_message.read! if user_message&.fresh?
   end
 
   def create
