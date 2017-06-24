@@ -1,8 +1,8 @@
 feature 'Messages', js: true do
   let!(:sender) { create(:user) }
-  let!(:first_receiver) { create(:user) }
-  let!(:second_receiver) { create(:user) }
-  let!(:non_receiver) { create(:user) }
+  let!(:first_recipient) { create(:user) }
+  let!(:second_recipient) { create(:user) }
+  let!(:non_recipient) { create(:user) }
 
   feature 'creating' do
     before(:each) do
@@ -23,7 +23,7 @@ feature 'Messages', js: true do
       fill_and_send_form
       sign_out sender
 
-      sign_in first_receiver
+      sign_in first_recipient
       visit root_path
 
       expect(page).to have_content('Message title')
@@ -36,20 +36,20 @@ feature 'Messages', js: true do
       fill_and_send_form
       sign_out sender
 
-      sign_in second_receiver
+      sign_in second_recipient
       visit root_path
 
       expect(page).to have_content('Message title')
       expect(page).to have_content('Lorem Ipsum')
     end
 
-    it 'is not available for non_receiver' do
+    it 'is not available for non_recipient' do
       sign_in sender
       visit root_path
       fill_and_send_form
       sign_out sender
 
-      sign_in non_receiver
+      sign_in non_recipient
       visit root_path
 
       expect(page).to_not have_content('Message title')
@@ -63,8 +63,8 @@ feature 'Messages', js: true do
     click_on 'New message'
     fill_in 'message_title', with: 'Message title'
     fill_in 'message_content', with: 'Lorem Ipsum'
-    select2(first_receiver.first_name, from: 'message_recipient_ids')
-    select2(second_receiver.first_name, from: 'message_recipient_ids')
+    select2(first_recipient.first_name, from: 'message_recipient_ids')
+    select2(second_recipient.first_name, from: 'message_recipient_ids')
 
     click_on 'Send'
   end

@@ -1,4 +1,6 @@
 module FeatureHelpers
+  include Warden::Test::Helpers
+  
   def select2(value, **options)
     script = <<-JS
       $('select##{options[:from]}').siblings('.select2-container').find('.select2-selection').trigger('click')

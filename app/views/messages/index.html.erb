@@ -1,12 +1,12 @@
-<h1>All messages</h1>
+<h1><%= page_title %></h1>
 
 <div class="row">
 
   <div class="col-3">
     <list-group>
-      <a class="list-group-item" href="#">Sent messages</a>
-      <a class="list-group-item" href="#">Received messages</a>
-      <a class="list-group-item" href="#">Drafts</a>
+      <%= link_to 'Inbox', messages_inbox_path, class: 'list-group-item' %>
+      <%= link_to 'Sent', messages_sent_path, class: 'list-group-item' %>
+      <%= link_to 'Drafts', messages_drafts_path, class: 'list-group-item' %>
     </list-group>
   </div>
 
@@ -17,24 +17,29 @@
       </button>
       <div class="collapse" id="new_message">
         <div class="card card-block">
-          <%= render 'form', message: @message %>
+          <%= render 'messages/form', message: @message %>
         </div>
       </div>
     </p>
-
-    <div class="list-group">
-      <% @messages.each do |message| %>
-        <%= link_to message, class: 'list-group-item list-group-item-action flex-column align-items-start' do %>
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1"><%= message.title %></h5>
-            <small>
-              <%= "#{message.sender.first_name}, #{time_ago_in_words(message.created_at)} ago" %>
-            </small>
-          </div>
-          <p class="mb-1"><%= message.content %></p>
+    <% if @messages.any? %>
+      <div class="list-group">
+        <% @messages.each do |message| %>
+          <%= link_to message, class: 'list-group-item list-group-item-action flex-column align-items-start' do %>
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1"><%= message.title %></h5>
+              <small>
+                <%= "#{message.sender.first_name}, #{time_ago_in_words(message.created_at)} ago" %>
+              </small>
+            </div>
+            <p class="mb-1"><%= raw message.content %></p>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+     <% else %>
+       <div class="jumbotron text-center">
+         <h3>There are no messages yet!</h3>
+       </div>
+     <% end %>
   </div>
 
 </div>

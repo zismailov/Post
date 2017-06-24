@@ -32,6 +32,9 @@ module Post
         helper_specs:  false
     end
 
+    config.action_view.sanitized_allowed_tags = %w(b i strong a)
+    config.action_view.sanitized_allowed_attributes = %w(href)
+
     # Don't generate system test files.
     config.generators.system_tests = nil
   end
