@@ -18,8 +18,6 @@
 
 FactoryGirl.define do
   factory :user_message do
-    message
-    user
     state :fresh
   end
 end

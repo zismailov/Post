@@ -8,7 +8,7 @@ module MessagesHelper
   end
 
   def read_class(message)
-    if message.user_messages.find_by(user: current_user).fresh?
+    if message.user_messages.find_by(user: current_user)&.fresh?
       'list-group-item-info'
     end
   end
