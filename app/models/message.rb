@@ -22,4 +22,6 @@ class Message < ApplicationRecord
   has_many :user_messages, dependent: :destroy
 
   scope :drafts, -> { where(draft: true) }
+
+  self.per_page = 10
 end

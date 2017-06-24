@@ -5,6 +5,7 @@ class Messages::InboxController < ApplicationController
     @messages = current_user.received_messages
                       .includes(:sender)
                       .includes(:user_messages)
+                      .paginate(page: params[:page])
                       .order(created_at: :desc)
     @message = current_user.sent_messages.build
 

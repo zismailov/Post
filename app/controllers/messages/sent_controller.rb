@@ -4,6 +4,7 @@ class Messages::SentController < ApplicationController
   def index
     @messages = current_user.sent_messages
                       .includes(:sender)
+                      .paginate(page: params[:page])
                       .order(created_at: :desc)
     @message = current_user.sent_messages.build
 

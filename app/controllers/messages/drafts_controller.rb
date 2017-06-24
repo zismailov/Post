@@ -5,6 +5,7 @@ class Messages::DraftsController < ApplicationController
     @messages = current_user.sent_messages
                       .drafts
                       .includes(:sender)
+                      .paginate(page: params[:page])
                       .order(created_at: :desc)
     @message = current_user.sent_messages.build
 
