@@ -4,6 +4,7 @@ class Messages::InboxController < ApplicationController
   def index
     @messages = current_user.received_messages
                       .includes(:sender)
+                      .includes(:user_messages)
                       .order(created_at: :desc)
     @message = current_user.sent_messages.build
 

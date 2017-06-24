@@ -41,6 +41,6 @@ class MessagePolicy < ApplicationPolicy
   end
 
   def is_recipient?
-    record.recipients.includes(:user).map(&:user).include?(user)
+    record.user_messages.map(&:user).include?(user)
   end
 end

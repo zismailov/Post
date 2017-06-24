@@ -24,7 +24,7 @@
     <% if @messages.any? %>
       <div class="list-group">
         <% @messages.each do |message| %>
-          <%= link_to message, class: 'list-group-item list-group-item-action flex-column align-items-start' do %>
+          <%= link_to message, class: "list-group-item list-group-item-action flex-column align-items-start #{read_class(message)}" do %>
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1"><%= message.title %></h5>
               <small>

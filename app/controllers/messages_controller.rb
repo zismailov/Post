@@ -15,9 +15,9 @@ class MessagesController < ApplicationController
     if message.save
       UserMessageCreatorService.new(message.id, message_params).call
       flash[:notice] = 'Message sent!'
-      redirect_to message
+      redirect_to messages_sent_path
     else
-      redirect_to messages_path, notice: 'Something went wrong'
+      redirect_to messages_inbox_path, notice: 'Something went wrong'
     end
   end
 
