@@ -7,7 +7,7 @@ feature 'Messages', js: true do
   feature 'creating' do
     before(:each) do
       login_as(sender, scope: :user)
-      visit root_path
+      visit messages_inbox_path
     end
 
     scenario 'shows successfull flash message' do
@@ -19,12 +19,12 @@ feature 'Messages', js: true do
   feature 'viewing' do
     it 'is available for first recipient' do
       sign_in sender
-      visit root_path
+      visit messages_inbox_path
       fill_and_send_form
       sign_out sender
 
       sign_in first_recipient
-      visit root_path
+      visit messages_inbox_path
 
       expect(page).to have_content('Message title')
       expect(page).to have_content('Lorem Ipsum')
@@ -32,12 +32,12 @@ feature 'Messages', js: true do
 
     it 'is available for second recipient' do
       sign_in sender
-      visit root_path
+      visit messages_inbox_path
       fill_and_send_form
       sign_out sender
 
       sign_in second_recipient
-      visit root_path
+      visit messages_inbox_path
 
       expect(page).to have_content('Message title')
       expect(page).to have_content('Lorem Ipsum')
@@ -45,26 +45,50 @@ feature 'Messages', js: true do
 
     it 'is not available for non_recipient' do
       sign_in sender
-      visit root_path
+      visit messages_inbox_path
       fill_and_send_form
       sign_out sender
 
       sign_in non_recipient
-      visit root_path
+      visit messages_inbox_path
 
       expect(page).to_not have_content('Message title')
       expect(page).to_not have_content('Lorem Ipsum')
+    end
+
+    it 'is shown in "Sent" for sender' do
+      sign_in sender
+      visit messages_inbox_path
+      fill_and_send_form
+
+      visit messages_sent_path
+
+      expect(page).to have_content('Message title')
+      expect(page).to have_content('Lorem Ipsum')
+    end
+
+    it 'draft is shown in "Drafts" for sender' do
+      sign_in sender
+      visit messages_inbox_path
+      fill_and_send_form(draft: true)
+
+      visit messages_sent_path
+
+      expect(page).to have_content('Message title')
+      expect(page).to have_content('Lorem Ipsum')
     end
   end
 
   private
 
-  def fill_and_send_form
+  def fill_and_send_form(draft: nil)
     click_on 'New message'
     fill_in 'message_title', with: 'Message title'
     fill_in 'message_content', with: 'Lorem Ipsum'
     select2(first_recipient.first_name, from: 'message_recipient_ids')
     select2(second_recipient.first_name, from: 'message_recipient_ids')
+
+    check 'Draft?' if draft
 
     click_on 'Send'
   end
