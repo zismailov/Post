@@ -18,6 +18,13 @@
 #  first_name             :string
 #  last_name              :string
 #
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_first_name            (first_name)
+#  index_users_on_last_name             (last_name)
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 
 require 'rails_helper'
 

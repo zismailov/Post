@@ -18,6 +18,13 @@
 #  first_name             :string
 #  last_name              :string
 #
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_first_name            (first_name)
+#  index_users_on_last_name             (last_name)
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -28,6 +35,9 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   has_many :sent_messages, foreign_key: :sender_id, class_name: 'Message'
-  has_many :recipients
-  has_many :received_messages, through: :recipients, foreign_key: :message_id, source: :message
+  has_many :user_messages
+  has_many :received_messages,
+      through: :user_messages,
+      foreign_key: :message_id,
+      source: :message
 end

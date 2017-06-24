@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
     message = MessageBuilderService.new(current_user.id, message_params).call
 
     if message.save
-      RecipientCreatorService.new(message.id, message_params).call
+      UserMessageCreatorService.new(message.id, message_params).call
       flash[:notice] = 'Message sent!'
       redirect_to message
     else
