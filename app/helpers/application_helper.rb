@@ -13,4 +13,8 @@ module ApplicationHelper
       User.all.to_a - [current_user], :id, :first_name, params[:sender]
     )
   end
+
+  def current_page
+    request.env['PATH_INFO']
+  end
 end

@@ -2,18 +2,19 @@
   <div class="card card-block">
     <%= form_tag '', class: 'form-inline', id: 'message_filter', method: :get do %>
 
-      <div class="col-5">
-        <%= select_tag :sender, users_except_current, class: 'select2 form-control', include_blank: 'Filter by user'%>
+      <div class="col-4">
+        <%= select_tag :sender, users_except_current, class: 'select2 form-control', include_blank: 'Filter by sender'%>
       </div>
 
       <div class="col-5">
         <%= text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search by title or content'%>
       </div>
 
-      <div class="col-2">
+      <div class="col-3">
         <%= submit_tag 'Filter', class: 'btn btn-primary' %>
+        <%= link_to 'Reset', current_page, class: 'btn' %>
       </div>
-
+      
     <% end %>
   </div>
 </p>
