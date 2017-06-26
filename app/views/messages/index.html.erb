@@ -21,26 +21,7 @@
         </div>
       </div>
     </p>
-    <% if @messages.any? %>
-      <div id="messages" class="list-group">
-        <% @messages.each do |message| %>
-          <%= link_to message, class: "list-group-item list-group-item-action flex-column align-items-start #{read_class(message)}" do %>
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1"><%= message.title %></h5>
-              <small>
-                <%= "#{message.sender.first_name}, #{time_ago_in_words(message.created_at)} ago" %>
-              </small>
-            </div>
-            <p class="mb-1"><%= raw message.content %></p>
-          <% end %>
-        <% end %>
-      </div>
-      <div id="infinite_scroll" class="text-center"><%= will_paginate @messages %></div>
-     <% else %>
-       <div class="jumbotron text-center">
-         <h3>There are no messages yet!</h3>
-       </div>
-     <% end %>
+    <div id="messages"><%= render 'messages/messages_list' %></div>
   </div>
 
 </div>

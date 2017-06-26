@@ -1,6 +1,7 @@
-$('#messages').append('<%= j render @messages %>');
-  <% if @messages.next_page %>
-  $('.pagination').replaceWith('<%= j will_paginate @messages %>');
+$('#messages').append('<%= j render partial: "messages/messages_list" %>');
+<% if @messages.next_page %>
+  $('.pagination').remove();
+  $('#infinite_scroll').html('<%= j will_paginate @messages %>');
 <% else %>
   $(window).off('scroll');
   $('.pagination').remove();
