@@ -7,4 +7,10 @@ module ApplicationHelper
       notice: 'alert-info'
     }[flash_type.to_sym] || flash_type.to_s
   end
+
+  def users_except_current
+    options_from_collection_for_select(
+      User.all.to_a - [current_user], 'id', 'first_name'
+    )
+  end
 end
