@@ -6,7 +6,7 @@
 
   <div class="form-group">
     <%= f.label :recipients %>
-    <%= f.select :recipient_ids, recipients_for_select, {}, class: 'form-control select2-tags', multiple: true %>
+    <%= f.select :recipient_ids, users_except_current, {}, class: 'form-control select2-tags', multiple: true %>
   </div>
 
   <div class="form-group">

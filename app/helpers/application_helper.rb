@@ -10,7 +10,7 @@ module ApplicationHelper
 
   def users_except_current
     options_from_collection_for_select(
-      User.all.to_a - [current_user], 'id', 'first_name'
+      User.all.to_a - [current_user], :id, :first_name
     )
   end
 end
