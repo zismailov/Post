@@ -1,16 +1,11 @@
-<h1><%= page_title %></h1>
-
-<div class="row">
+<div class="row mt-4">
 
   <div class="col-3">
-    <list-group>
-      <%= link_to 'Inbox', messages_inbox_path, class: 'list-group-item' %>
-      <%= link_to 'Sent', messages_sent_path, class: 'list-group-item' %>
-      <%= link_to 'Drafts', messages_drafts_path, class: 'list-group-item' %>
-    </list-group>
+    <%= render 'shared/sidebar' %>
   </div>
 
   <div class="col-9">
+    <h1><%= page_title %></h1>
     <p>
       <button aria-controls="new_message" aria-expanded="false" class="btn btn-primary" data-target="#new_message" data-toggle="collapse" type="button">
         New message
@@ -23,7 +18,7 @@
     </p>
 
     <%= render 'messages/filter_form'%>
-    
+
     <div id="messages"><%= render 'messages/messages_list' %></div>
   </div>
 
