@@ -7,7 +7,10 @@ class Messages::SentController < ApplicationController
                       .paginate(page: params[:page])
                       .order(created_at: :desc)
     @message = current_user.sent_messages.build
-
-    render 'messages/index'
+    
+    respond_to do |format|
+      format.html { render 'messages/index' }
+      format.js { render 'messages/index' }
+    end
   end
 end
