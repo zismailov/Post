@@ -29,6 +29,7 @@ gem 'figaro'
 gem 'devise'
 gem 'will_paginate', '~> 3.1.0'
 gem 'pundit', '1.1.0'
+gem 'pg_search', '~> 2.0.1'
 
 group :development, :test do
   gem 'pry'
