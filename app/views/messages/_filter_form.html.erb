@@ -3,7 +3,7 @@
     <%= form_tag '', class: 'form-inline', id: 'message_filter', method: :get do %>
 
       <div class="col-4">
-        <%= select_tag :sender, users_except_current, class: 'select2 form-control', include_blank: 'Filter by sender'%>
+        <%= select_tag :sender, users_except_current, class: 'form-control', include_blank: 'Filter by sender'%>
       </div>
 
       <div class="col-5">
@@ -14,7 +14,7 @@
         <%= submit_tag 'Filter', class: 'btn btn-primary' %>
         <%= link_to 'Reset', current_page, class: 'btn' %>
       </div>
-      
+
     <% end %>
   </div>
 </p>
