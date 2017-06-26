@@ -34,6 +34,7 @@ module Post
 
     config.action_view.sanitized_allowed_tags = %w(b i strong a)
     config.action_view.sanitized_allowed_attributes = %w(href)
+    config.active_record.schema_format = :sql
 
     # Don't generate system test files.
     config.generators.system_tests = nil

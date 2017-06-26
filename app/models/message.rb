@@ -17,10 +17,17 @@
 
 class Message < ApplicationRecord
   include PgSearch
-  pg_search_scope :search_full_test,
+
+  pg_search_scope :search_full_text,
     against: [:title, :content],
-    using: [:tsearch, :trigram, :dmetaphone]
- 
+    using: {
+      tsearch: {},
+      dmetaphone: {},
+      trigram: {
+        threshold: 0.3
+      },
+    }
+
   attr_accessor :recipient_ids
 
   belongs_to :sender, class_name: 'User', foreign_key: :sender_id
