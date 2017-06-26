@@ -4,6 +4,7 @@ module CommonMessagesController
   def self.included(base)
     base.before_action :authenticate_user!
     base.before_action :set_messages, only: :index
+    base.before_action :filter_messages, only: :index
   end
 
   def index
@@ -19,5 +20,15 @@ module CommonMessagesController
 
   def set_messages
     # Must be overriden in the receiver controller
+  end
+
+  def filter_messages
+    if params[:sender].present?
+      @messages = @messages.where(sender_id: params[:sender])
+    end
+
+    if params[:query].present?
+      @messages = @messages.search_full_text(params[:query])
+    end
   end
 end

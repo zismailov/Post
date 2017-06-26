@@ -4,16 +4,10 @@ class Messages::InboxController < ApplicationController
   private
 
   def set_messages
-    messages = current_user.received_messages
+    @messages = current_user.received_messages
                       .includes(:sender)
                       .includes(:user_messages)
                       .paginate(page: params[:page])
                       .order(created_at: :desc)
-
-    if params[:sender].present?
-      messages = messages.search_full_text(params[:query])
-    end
-
-    @messages = messages
   end
 end
