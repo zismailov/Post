@@ -27,8 +27,15 @@ end
 
 Capybara.javascript_driver = :poltergeist
 
-Capybara.server_port = 3001
-Capybara.app_host = 'http://localhost:3001'
+Capybara.default_max_wait_time = 5
+Capybara.register_server :puma do |app, port|
+  require 'puma'
+  Puma::Server.new(app).tap do |s|
+    s.add_tcp_listener Capybara.server_host, port
+  end.run.join
+  host = 'http://localhost:3001'
+  port = 3001
+end
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true

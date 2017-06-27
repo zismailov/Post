@@ -1,0 +1,13 @@
+ <div class="list-group" id=("recipient_#{current_user.id}")>
+   <% if @messages.any? %>
+     <%= render partial: 'messages/message', collection: @messages, as: :message %>
+
+     <div id="infinite_scroll" class="text-center">
+       <%= will_paginate @messages %>
+     </div>
+   <% else %>
+     <div class="jumbotron text-center">
+       h3 There are no messages!
+     </div>
+    <% end %>
+ </div>
