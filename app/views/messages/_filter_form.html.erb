@@ -1,13 +1,17 @@
 <p>
   <div class="card card-block">
-    <%= form_tag '', class: 'form-inline', id: 'message_filter', method: :get do %>
+    <%= form_tag '', class: 'form-inline', id: 'message_filter', remote: true, method: :get do %>
 
       <div class="col-4">
-        <%= select_tag :sender, users_except_current, class: 'form-control', include_blank: 'Filter by sender'%>
+        <%= select_tag :sender, users_except_current, class: 'form-control', include_blank: 'Filter by sender'
+            # onchange: 'this.form.submit()'
+        %>
       </div>
 
       <div class="col-5">
-        <%= text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search by title or content'%>
+        <%= text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search by title or content'
+             # onchange: 'this.form.submit()'
+        %>
       </div>
 
       <div class="col-3">

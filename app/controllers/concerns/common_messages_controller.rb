@@ -10,10 +10,7 @@ module CommonMessagesController
   def index
     @message = current_user.sent_messages.build
 
-    respond_to do |format|
-      format.html { render 'messages/index' }
-      format.js { render 'messages/index' }
-    end
+    respond_to_filtering_and_pagination
   end
 
   private
@@ -29,6 +26,18 @@ module CommonMessagesController
 
     if params[:query].present?
       @messages = @messages.search_full_text(params[:query])
+    end
+  end
+
+  def respond_to_filtering_and_pagination
+    respond_to do |format|
+      format.html { render 'messages/index' }
+
+      if params[:sender] || params[:query] || params[:commit]
+        format.js { render 'messages/filter_results' }
+      else
+        format.js { render 'messages/index' }
+      end
     end
   end
 end
