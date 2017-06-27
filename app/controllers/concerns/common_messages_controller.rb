@@ -5,6 +5,7 @@ module CommonMessagesController
     base.before_action :authenticate_user!
     base.before_action :set_messages, only: :index
     base.before_action :filter_messages, only: :index
+    base.before_action :reorder_messages, only: :index
   end
 
   def index
@@ -27,6 +28,10 @@ module CommonMessagesController
     if params[:query].present?
       @messages = @messages.search_full_text(params[:query])
     end
+  end
+
+  def reorder_messages
+    @messages = MessagesOrderingService.new(@messages, params).call
   end
 
   def respond_to_filtering_and_pagination

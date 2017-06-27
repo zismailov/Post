@@ -63,7 +63,7 @@ feature 'Filtering', js: true do
     end
 
     scenario 'content' do
-      fill_in 'query', with: third_message.content.split.last
+      fill_in 'query', with: third_message.content.split.first
       click_on 'Filter'
 
       within '#messages' do
@@ -98,7 +98,7 @@ feature 'Filtering', js: true do
 
     scenario 'content to ditch unrelated messages' do
       select third_user.first_name, from: 'sender'
-      fill_in 'query', with: first_message.content.split.last
+      fill_in 'query', with: first_message.content.split.first
       click_on 'Filter'
 
       within '#messages' do

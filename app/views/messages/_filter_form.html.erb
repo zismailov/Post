@@ -1,24 +1,39 @@
 <p>
   <div class="card card-block">
-    <%= form_tag '', class: 'form-inline', id: 'message_filter', remote: true, method: :get do %>
 
+    <%= form_tag '', class: 'form-inline', id: 'message_filter', remote: true, method: :get do %>
       <div class="col-4">
-        <%= select_tag :sender, users_except_current, class: 'form-control', include_blank: 'Filter by sender'
-            # onchange: 'this.form.submit()'
-        %>
+        <%= select_tag :sender, users_except_current, class: 'form-control', include_blank: 'Filter by sender' %>
       </div>
 
-      <div class="col-5">
-        <%= text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search by title or content'
-             # onchange: 'this.form.submit()'
-        %>
+      <div class="col-4">
+        <%= text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search by title or content' %>
       </div>
 
       <div class="col-3">
         <%= submit_tag 'Filter', class: 'btn btn-primary' %>
         <%= link_to 'Reset', current_page, class: 'btn' %>
       </div>
-
     <% end %>
+
+    <div class="row">
+      <div class="col-12">
+        Order by Date
+        <%= link_to url_for(params.permit(:sort_by, :order).merge(sort_by: 'date', order: 'asc')) do %>
+          <i class="fa fa-sort-asc"></i>
+        <% end %>
+        <%= link_to url_for(params.permit(:sort_by, :order).merge(sort_by: 'date', order: 'desc')) do %>
+          <i class="fa fa-sort-desc"></i>
+        <% end %>
+        or Author
+        <%= link_to url_for(params.permit(:sort_by, :order).merge(sort_by: 'author', order: 'asc')) do %>
+          <i class="fa fa-sort-asc"></i>
+        <% end %>
+        <%= link_to url_for(params.permit(:sort_by, :order).merge(sort_by: 'author', order: 'desc')) do %>
+          <i class="fa fa-sort-desc"></i>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 </p>

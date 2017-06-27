@@ -20,6 +20,7 @@ gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'select2-rails', '4.0.3'
 gem 'jquery-turbolinks', '~> 2.1.0'
 gem 'jquery-rails'
+gem 'font-awesome-sass', '~> 4.7.0'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'

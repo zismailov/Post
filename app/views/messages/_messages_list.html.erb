@@ -8,7 +8,7 @@
             <%= "#{message.sender.first_name}, #{time_ago_in_words(message.created_at)} ago" %>
           </small>
         </div>
-        <p class="mb-1"><%= raw message.content %></p>
+        <p class="mb-1"><%= raw truncate(message.content, length: 200) %></p>
       <% end %>
     <% end %>
     <div class="text-center" id="infinite_scroll"><%= will_paginate @messages %></div>
