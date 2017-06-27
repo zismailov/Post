@@ -14,8 +14,12 @@ class MessagesController < ApplicationController
 
     if message.save
       UserMessageCreatorService.new(message.id, message_params).call
-      flash[:notice] = 'Message sent!'
-      redirect_to messages_sent_path
+      message_params[:recipient_ids].reject(&:blank?).each do |id|
+        ActionCable.server.broadcast(
+          "messages_channel",
+          message: render_message(message)
+        )
+      end
     else
       redirect_to messages_inbox_path, notice: 'Something went wrong'
     end
@@ -25,5 +29,9 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:title, :content, :draft, recipient_ids: [])
+  end
+
+  def render_message(message)
+    render partial: 'message', locals: { message: message }
   end
 end

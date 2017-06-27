@@ -19,7 +19,21 @@
 
     <%= render 'messages/filter_form'%>
 
-    <div id="messages"><%= render 'messages/messages_list' %></div>
+    <div id="messages">
+      <div class="list-group">
+        <% if @messages.any? %>
+          <%= render partial: 'messages/message', collection: @messages, as: :message %>
+          <div id="infinite_scroll" class="text-center">
+            <%= will_paginate @messages %>
+          </div>
+        <% else %>
+          <div class="jumbotron text-center">
+            <h3>There are no messages!</h3>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 
 </div>
