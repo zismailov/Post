@@ -25,11 +25,11 @@
         <%= link_to url_for(params.permit(:sort_by, :order).merge(sort_by: 'date', order: 'desc')) do %>
           <i class="fa fa-sort-desc"></i>
         <% end %>
-        or Author
-        <%= link_to url_for(params.permit(:sort_by, :order).merge(sort_by: 'author', order: 'asc')) do %>
+        or Status
+        <%= link_to url_for(params.permit(:sort_by, :order).merge(sort_by: 'status', order: 'asc')) do %>
           <i class="fa fa-sort-asc"></i>
         <% end %>
-        <%= link_to url_for(params.permit(:sort_by, :order).merge(sort_by: 'author', order: 'desc')) do %>
+        <%= link_to url_for(params.permit(:sort_by, :order).merge(sort_by: 'status', order: 'desc')) do %>
           <i class="fa fa-sort-desc"></i>
         <% end %>
       </div>

@@ -6,15 +6,21 @@ class MessagesOrderingService
 
   def call
     if @params[:sort_by].present? && @params[:order].present?
-      if @params[:sort_by] == 'date' || @params[:sort_by] == 'author'
-        sort_by = :created_at
-      end
+
+      sort_by = :created_at if @params[:sort_by] == 'date'
+      sort_by = 'status' if @params[:sort_by] == 'status'
 
       if @params[:order] == 'asc' || @params[:order] == 'desc'
         order = @params[:order]
       end
 
-      @messages = @messages.reorder(sort_by => order) if sort_by && order
+      if order && sort_by && sort_by == 'status'
+        @messages = @messages
+                      .joins(:user_messages)
+                      .reorder("user_messages.state #{order}")
+      elsif order && sort_by && sort_by == :created_at
+        @messages = @messages.reorder(sort_by => order)
+      end
     end
     @messages
   end
