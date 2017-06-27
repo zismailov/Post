@@ -14,12 +14,11 @@ class MessagesController < ApplicationController
 
     if message.save
       UserMessageCreatorService.new(message.id, message_params).call
-      message_params[:recipient_ids].reject(&:blank?).each do |id|
-        ActionCable.server.broadcast(
-          "messages_channel",
-          message: render_message(message)
-        )
-      end
+      ActionCable.server.broadcast(
+        "messages_channel",
+        message: render_message(message),
+        recipients: message_params[:recipient_ids].reject(&:blank?)
+      )
     else
       redirect_to messages_inbox_path, notice: 'Something went wrong'
     end

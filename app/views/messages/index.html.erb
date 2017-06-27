@@ -6,21 +6,15 @@
 
   <div class="col-9">
     <h1><%= page_title %></h1>
-    <p>
-      <button aria-controls="new_message" aria-expanded="false" class="btn btn-primary" data-target="#new_message" data-toggle="collapse" type="button">
-        New message
-      </button>
-      <div class="collapse" id="new_message">
-        <div class="card card-block">
-          <%= render 'messages/form', message: @message %>
-        </div>
-      </div>
-    </p>
+
+    <% if current_page?(messages_inbox_path) || current_page?(root_path) %>
+      <%= render 'messages/form', message: @message %>
+    <% end%>
 
     <%= render 'messages/filter_form'%>
 
     <div id="messages">
-      <div class="list-group">
+      <div class="list-group" id=("recipient_#{current_user.id}")>
         <% if @messages.any? %>
           <%= render partial: 'messages/message', collection: @messages, as: :message %>
           <div id="infinite_scroll" class="text-center">
