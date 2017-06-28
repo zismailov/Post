@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MessagesHelper
   def page_title
     params[:controller].gsub('messages/', '').capitalize

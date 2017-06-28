@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessagePolicy < ApplicationPolicy
   attr_reader :user, :record
 
@@ -7,11 +9,11 @@ class MessagePolicy < ApplicationPolicy
   end
 
   def show?
-    is_sender_or_recipient?
+    sender_or_recipient?
   end
 
   def destroy?
-    is_sender_or_recipient?
+    sender_or_recipient?
   end
 
   def edit?
@@ -19,28 +21,28 @@ class MessagePolicy < ApplicationPolicy
   end
 
   def update?
-    is_sender_or_recipient?
+    sender_or_recipient?
   end
 
   def manage?
-    is_sender_or_recipient?
+    sender_or_recipient?
   end
 
   def update_status?
-    is_sender_or_recipient?
+    sender_or_recipient?
   end
 
   private
 
-  def is_sender_or_recipient?
-    is_sender? || is_recipient?
+  def sender_or_recipient?
+    sender? || recipient?
   end
 
-  def is_sender?
+  def sender?
     record.sender == user
   end
 
-  def is_recipient?
+  def recipient?
     record.user_messages.map(&:user).include?(user)
   end
 end

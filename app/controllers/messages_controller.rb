@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessagesController < ApplicationController
   before_action :authenticate_user!
 
@@ -14,11 +16,7 @@ class MessagesController < ApplicationController
 
     if message.save
       UserMessageCreatorService.new(message.id, message_params).call
-      ActionCable.server.broadcast(
-        "messages_channel",
-        message: render_message(message),
-        recipients: message_params[:recipient_ids].reject(&:blank?)
-      )
+      broadcast_message(message)
     else
       redirect_to messages_inbox_path, notice: 'Something went wrong'
     end
@@ -32,5 +30,13 @@ class MessagesController < ApplicationController
 
   def render_message(message)
     render partial: 'message', locals: { message: message }
+  end
+
+  def broadcast_message(message)
+    ActionCable.server.broadcast(
+      'messages_channel',
+      message: render_message(message),
+      recipients: message_params[:recipient_ids].reject(&:blank?)
+    )
   end
 end

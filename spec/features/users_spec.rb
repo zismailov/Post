@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 feature 'Users' do
   feature 'registration' do
     scenario 'failed if no first name provided' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: messages
@@ -19,14 +21,14 @@ class Message < ApplicationRecord
   include PgSearch
 
   pg_search_scope :search_full_text,
-    against: [:title, :content],
-    using: {
-      tsearch: {},
-      dmetaphone: {},
-      trigram: {
-        threshold: 0.3
-      },
-    }
+                  against: %i[title content],
+                  using: {
+                    tsearch: {},
+                    dmetaphone: {},
+                    trigram: {
+                      threshold: 0.3
+                    }
+                  }
 
   attr_accessor :recipient_ids
 

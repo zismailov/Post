@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 feature 'Messages', js: true do
   let!(:sender) { create(:user) }
   let!(:first_recipient) { create(:user) }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -37,7 +39,7 @@ class User < ApplicationRecord
   has_many :sent_messages, foreign_key: :sender_id, class_name: 'Message'
   has_many :user_messages
   has_many :received_messages,
-      through: :user_messages,
-      foreign_key: :message_id,
-      source: :message
+           through: :user_messages,
+           foreign_key: :message_id,
+           source: :message
 end

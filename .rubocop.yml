@@ -1,0 +1,19 @@
+AllCops:
+  TargetRubyVersion: 2.4.0
+  Exclude:
+  - '**/Rakefile'
+  - '**/Gemfile'
+  - '**/config.ru'
+  - 'db/**/*'
+  - 'config/**/*'
+  - 'script/**/*'
+Documentation:
+  Enabled: false
+Rails:
+  Enabled: true
+Metrics/ModuleLength:
+  Exclude:
+    - "**/*_spec.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "**/*_spec.rb"

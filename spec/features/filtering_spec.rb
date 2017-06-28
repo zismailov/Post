@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 feature 'Filtering', js: true do
   let!(:first_user) { create(:user) }
   let!(:second_user) { create(:user) }

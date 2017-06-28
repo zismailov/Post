@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessageBuilderService
   def initialize(sender_id, params)
     @sender_id = sender_id

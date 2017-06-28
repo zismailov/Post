@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserMessageCreatorService
   def initialize(message_id, params)
     @recipient_ids = params[:recipient_ids]

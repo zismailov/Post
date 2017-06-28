@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Messages::InboxController < ApplicationController
   include CommonMessagesController
 
@@ -5,9 +7,9 @@ class Messages::InboxController < ApplicationController
 
   def set_messages
     @messages = current_user.received_messages
-                      .includes(:sender)
-                      .includes(:user_messages)
-                      .paginate(page: params[:page])
-                      .order(created_at: :desc)
+                            .includes(:sender)
+                            .includes(:user_messages)
+                            .paginate(page: params[:page])
+                            .order(created_at: :desc)
   end
 end
